@@ -1,0 +1,32 @@
+{
+    "dotLog.config": [
+      // {
+      //   "trigger": "log",
+      //   "description": "quick console.log result",
+      //   "format": "console.log"
+      // },
+      {
+        "trigger": "log", // it means .log can trigger the completion.
+        "description": "edit quick console.log result", // it  shows completion description when triggered.
+        "format": "console.log", //the result will be format like "console.log('xxx', xxx)"
+        "hideName": false, // if set true, then xxx.log =>  console.(xxx);
+        "prefix": "", // add the  prefix or suffix to console.log(`${prefix}xxx ${suffix}`, xxx)
+        "suffix": " :"
+      },
+      {
+        "trigger": "clg",
+        "description": "quick console.log result",
+        "format": "console.log"
+      },
+      {
+        "trigger": "cwa",
+        "description": "quick console.warn result",
+        "format": "console.warn"
+      },
+      {
+        "trigger": "cer",
+        "description": "quick console.err result",
+        "format": "console.error"
+      }
+    ]
+}
