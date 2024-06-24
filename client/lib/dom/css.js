@@ -2,7 +2,14 @@
 /*                     class                    */
 /* -------------------------------------------- */
 
-
+/**
+ * 
+ * @param {HTMLElement | string} node 
+ * @param  {string | array | object} className 
+ * @returns {void}
+ // -> typeScript를 사용하지 않고 수동으로 입력 요소 알려주기
+ */
+//                      ⬇️문자가 오거나, 문자가 여러개 오거나, 배열, 유사배열을 받음
 function addClass(node,...className){
 
   if(typeof node === 'string') node = document.querySelector(node)

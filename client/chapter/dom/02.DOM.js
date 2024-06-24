@@ -78,5 +78,14 @@ const input = children[children.length -1]; // children배열에서 마지막 �
 
 
 /* 문서 대상 확인 */
+/* 
 // - matches
+elem.matches(css)는 DOM을 검색하는 일이 아닌 조금 다른 일을 합니다. 이 메서드는 요소 elem이 주어진 CSS 선택자와 일치하는지 여부를 판단해줍니다. 일치한다면 true, 아니라면 false를 반환하죠.
+요소가 담겨있는 배열 등을 순회해 원하는 요소만 걸러내고자 할 때 유용합니다.
+ */
+/* 
 // - contains
+
+ 노드의 부모-자식 관계를 확인할 수 있도록 도와주는 유용한 메서드 
+
+elemA.contains(elemB)는 elemB가 elemA에 속하거나(elemB가 elemA의 후손인 경우) elemA==elemB일 때, 참을 반환합니다. */

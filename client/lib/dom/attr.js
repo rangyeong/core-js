@@ -51,5 +51,4 @@ function setAttr (node,prop,value){
 //   }
 // }
 
-const attr = (node,prop,value) => !value ? getAttr(node,prop) : setAttr(node,prop,value)
-
+export const attr = (node,prop,value) => !value ? getAttr(node,prop) : setAttr(node,prop,value)
