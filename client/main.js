@@ -6,9 +6,9 @@ console.log('안녕 웹브라우저!');
 // confirm('정말..지울거야..?');
 // prompt('당신의 이름은 무엇입니까?')
 
-/* global clearContents */ //-> clearContents함수 문법 오류 안뜨게
+import { attr, getNode, clearContents, insertLast } from './lib/index.js';
 
-import { attr, getNode, getNodes } from './lib/index.js';
+console.log(attr);
 
 function phase1() {
   const first = document.querySelector('#firstNumber');
