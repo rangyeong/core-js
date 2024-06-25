@@ -1,65 +1,81 @@
-const a = 'hello';
+/* global gsap */
+import data from './data/data.js';
+import {
+  getNode,
+  addClass,
+  showAlert,
+  getRandom,
+  insertLast,
+  removeClass,
+  clearContents,
+  isNumericString,
+} from './lib/index.js';
 
-console.log('안녕 웹브라우저!');
+// [phase-1]
+// 1. 주접 떨기 버튼을 클릭 하는 함수
+//    - 주접 떨기 버튼 가져오기
+//    - 이벤트 연결하기 addEventListener('click')
 
-// alert('마우스 우클릭 사용 금지. 불펌 금지.');
-// confirm('정말..지울거야..?');
-// prompt('당신의 이름은 무엇입니까?')
+// 2. input 값 가져오기
+//    - input.value
 
-import { attr, getNode, clearContents, insertLast } from './lib/index.js';
+// 3. data함수에서 주접 1개 꺼내기
+//    - data(name)
+//    - getRandom()
 
-console.log(attr);
+// 4. pick 항목 랜더링하기
 
-function phase1() {
-  const first = document.querySelector('#firstNumber');
-  const second = document.querySelector('#secondNumber');
-  const clear = getNode('#clear');
-  const result = getNode('.result');
+// [phase-2]
+// 1. 아무 값도 입력 받지 못했을 때 예외처리 (콘솔 출력)
 
-  function hadleInput() {
-    const firstValue = +first.value;
-    const secondValue = Number(second.value);
+const submit = getNode('#submit');
+const nameField = getNode('#nameField');
+const result = getNode('.result');
 
-    let total = firstValue + secondValue;
+const tween = gsap.to('#nameField', {
+  duration: 0.1,
+  x: -10,
+  repeat: 5,
+  yoyo: true,
+});
 
-    clearContents(result);
+function handleSubmit(e) {
+  e.preventDefault();
 
-    insertLast(result, total);
+  const name = nameField.value;
+  const list = data(name);
+  const pick = list[getRandom(list.length)];
+
+  if (!name || name.replace(/\s*/g, '') === '') {
+    showAlert('.alert-error', '공백은 허용하지 않습니다.');
+
+    tween.play();
+
+    console.log();
+
+    return;
   }
 
-  function handleClear(e) {
-    e.preventDefault();
-    clearContents(first);
-    clearContents(second);
-    result.textContent = '-';
+  if (!isNumericString(name)) {
+    showAlert('.alert-error', '제대로된 이름을 입력해 주세요.');
+
+    return;
   }
 
-  //   first.addEventListener('input', debounce(hadleInput)); //-> 프로젝트할 땐 이렇게 쓰기
-  //   second.addEventListener('input', throtle(hadleInput));
-  first.addEventListener('input', hadleInput);
-  second.addEventListener('input', hadleInput);
-  clear.addEventListener('click', handleClear);
+  clearContents(result);
+  insertLast(result, pick);
 }
 
-function phase2() {
-  const calculator = getNode('.calculator');
-  const result = getNode('.result');
-  const clear = getNode('#clear');
-  const numberInputs = [...document.querySelectorAll('input:not(#clear)')];
+function handleCopy(){
+  const text = result.textContent;
 
-  function handleInput() {
-    const total = numberInputs.reduce((acc, cur) => acc + Number(cur.value), 0);
+  if(nameField.value){
+    
+      navigator.clipboard.writeText(text);
+      showAlert('.aler-success','클립보드 복사 완료!')
 
-    clearContents(result);
-    insertLast(result, total);
   }
-
-  function handleClear(e) {
-    e.preventDefault();
-    numberInputs.forEach(clearContents);
-    result.textContent = '-';
-  }
-
-  calculator.addEventListener('input', handleInput);
-  clear.addEventListener('click', handleClear);
 }
+
+submit.addEventListener('click', handleSubmit);
+result.addEventListener('click', handleCopy);
