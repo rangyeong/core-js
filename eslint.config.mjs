@@ -9,12 +9,12 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
+        // isString:true, // isString메서드를 글로벌로 인식시켜서 써도 빨간 줄 안나오게 하는 방법
       },
     },
-    rules:{
-      "no-unused-vars":'warn'
-    }
+    rules: {
+      'no-unused-vars': 'warn',
+    },
   },
-
 ];
 
